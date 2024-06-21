@@ -10,18 +10,14 @@ class Solution:
         # BST the left node < root Node < right Node
         # So the common ancestor has to be where the min(p,q) falls on left or root and the max else
 
-        p,q = min(p.val,q.val), max(p.val,q.val)
-        last_parent = root
+        p, q = min(p.val, q.val), max(p.val, q.val)
 
-        def recurse(node):
-            nonlocal last_parent
-            last_parent = node
+        def dfs(node, p, q):
             if node.val > p and node.val > q:
-                recurse(node.left)
+                return dfs(node.left, p, q)
             elif node.val < p and node.val < q:
-                recurse(node.right)
+                return dfs(node.right, p, q)
             else:
-                return
-        
-        recurse(root)
-        return last_parent
+                return node
+            
+        return dfs(root, p, q)
