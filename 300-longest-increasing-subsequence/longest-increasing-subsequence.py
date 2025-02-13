@@ -9,6 +9,7 @@ class Solution:
             for i in range(j+1, len(nums)):
                 if nums[j] < nums[i]:
                     LI[j] = max(LI[j], 1 + LI[i])
-                    length = max(length, LI[j])
+            
+            length = max(length, LI[j])
         
         return length
