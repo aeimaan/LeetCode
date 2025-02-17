@@ -17,7 +17,8 @@ class Solution:
             for prereq in adj_list[node]:
                 if topSort(prereq) == False:
                     return False
-            visited.remove(node)
+            # Remove so that other nodes dont trigger false for a node that was actually true
+            # visited.remove(node)
             adj_list[node] = []
             return True
         
