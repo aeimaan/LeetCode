@@ -14,13 +14,13 @@ class Solution:
         for i in range(max_len):
             cur = ""
             if i > len(num1)-1:
-                cur = int(num2[i]) + carry
+                cur = ord(num2[i]) - ord('0')+ carry
                 carry = 0
             elif i > len(num2)-1:
-                cur = int(num1[i]) + carry
+                cur = ord(num1[i]) - ord('0') + carry
                 carry = 0
             else:
-                cur = int(num1[i]) + int(num2[i]) + carry
+                cur = ord(num1[i]) - ord('0') + ord(num2[i])- ord('0') + carry
             carry = cur // 10
             cur = cur % 10
             res += str(cur)
