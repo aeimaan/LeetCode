@@ -1,27 +1,21 @@
 class Solution:
-    def combinationSum(
-        self, candidates: List[int], target: int
-    ) -> List[List[int]]:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        path = []
+        res = []
 
-        results = []
 
-        def backtrack(remain, comb, start):
-            if remain == 0:
-                # make a deep copy of the current combination
-                results.append(list(comb))
+        def backtrack(cur_sum, target, i):
+            if cur_sum == target:
+                res.append(path.copy())
                 return
-            elif remain < 0:
-                # exceed the scope, stop exploration.
+            if cur_sum > target or i > len(candidates):
                 return
-
-            for i in range(start, len(candidates)):
-                # add the number into the combination
-                comb.append(candidates[i])
-                # give the current number another chance, rather than moving on
-                backtrack(remain - candidates[i], comb, i)
-                # backtrack, remove the number from the combination
-                comb.pop()
-
-        backtrack(target, [], 0)
-
-        return results
+            
+            # recurse on the elements
+            for i in range(i, len(candidates)):
+                path.append(candidates[i])
+                backtrack( cur_sum + candidates[i], target, i )
+                path.pop()
+        
+        backtrack(0,target,0)
+        return res
