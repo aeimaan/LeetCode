@@ -27,11 +27,11 @@ class Solution:
                     if (r-l+1) < min_len:
                         l_idx = l
                         r_idx = r
-                        min_len = r-l+1
+                        # min_len = r-l+1
                     min_len = min( min_len, r-l+1)
                     if s[l] in fmap2:
                         fmap1[s[l]] -= 1
-                        if fmap1[s[l]] == 0: del fmap1[s[l]]
+                        # if fmap1[s[l]] == 0: del fmap1[s[l]]
                     l += 1
                     
 
