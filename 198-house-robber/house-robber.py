@@ -10,5 +10,4 @@ class Solution:
         for i in range(2, len(nums)):
             num = nums[i]
             mem[i] = max( num+mem[i-2], mem[i-1] )
-            maxMoney = max(maxMoney, mem[i])
-        return maxMoney
+        return mem[-1]
