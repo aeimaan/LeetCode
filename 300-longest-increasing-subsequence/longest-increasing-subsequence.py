@@ -10,6 +10,6 @@ class Solution:
                 if nums[i] < nums[j]: #Can add to a sub seq
                     memory[i] = max(memory[i] , 1 + memory[j])
                 
-                length = max(length, memory[i])
+            length = max(length, memory[i])
 
         return length
