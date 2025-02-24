@@ -4,14 +4,7 @@ class Solution:
         partition = []
 
         def isPalindrome(s):
-            l  = 0
-            r = len(s) -1
-            while l <= r:
-                if s[l] != s[r]:
-                    return False
-                l += 1
-                r -= 1
-            return True
+            return s == s[::-1]
 
         def dfs(i):
             if i >= len(s):
