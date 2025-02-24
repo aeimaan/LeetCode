@@ -1,32 +1,37 @@
-import random
-
+from random import randrange
 class Solution:
 
     def __init__(self, w: List[int]):
-        """
-        Build a prefix sum array of weights.
-        prefixSums[i] = sum of w[0]..w[i].
-        totalSum = sum of all weights.
-        """
-        self.prefixSums = []
-        runningSum = 0
-        for weight in w:
-            runningSum += weight
-            self.prefixSums.append(runningSum)
-        self.totalSum = runningSum
+       self.w = w
+       self.sum = sum(w)
+       self.p = [0] * len(w)
+       soFar = 0
+       for i in range(len(w)):
+        x = w[i]
+        curP = float(x/self.sum)
+        soFar += curP
+        self.p[i] = soFar
+
+
 
     def pickIndex(self) -> int:
-        """
-        1. Generate a random float x in [0, totalSum).
-        2. Linearly find which prefix interval x falls into.
-        3. Return the index of that interval.
-        """
-        x = random.random() * self.totalSum  # random float in [0, totalSum)
+        x = random.random()
+        # for i in range(len(self.w)-1):
+        #     if x > self.p[i] and x <= self.p[i+1]:
+        #         return i+1
+        lo = 0
+        hi = len(self.p) - 1
+        mid = 0
+        while lo < hi:
+            mid = (hi-lo)//2 + lo
+            if self.p[mid] == x: return mid
+            elif self.p[mid] < x: lo = mid + 1
+            else: hi = mid 
 
-        # Linear search: find the smallest i where prefixSums[i] > x
-        for i, prefixVal in enumerate(self.prefixSums):
-            if x < prefixVal:
-                return i
 
-        # Fallback (shouldn't normally happen if w has positive weights):
-        return len(self.prefixSums) - 1
+        return lo
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(w)
+# param_1 = obj.pickIndex()
