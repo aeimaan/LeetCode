@@ -1,19 +1,19 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        if len(intervals) == 1:
-            return intervals
-        intervals.sort(key = lambda i: i[0])
         res = []
+        intervals.sort(key = lambda i : i[0])
 
-        for start,end in intervals:
-            if res == []:
-                res.append([start,end])
+        for i in range(len(intervals)):
+            cur_start, cur_end = intervals[i] 
+            if i == 0:
+                res.append([cur_start, cur_end])
                 continue
-            cur_end = res[-1][1]
+            
+            merged_end = res[-1][1]
 
-            if (start <= cur_end):
-                res[-1][1] = max(cur_end, end)
+            if cur_start <= merged_end:
+                res[-1][1] = max(merged_end, cur_end)
             else:
-                res.append([start,end])
+                res.append([cur_start,cur_end])
 
         return res
