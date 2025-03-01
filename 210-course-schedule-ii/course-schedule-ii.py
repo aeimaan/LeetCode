@@ -14,10 +14,10 @@ class Solution:
                 return False
             if node in visited:
                 return True
-            if adj_list[node] == []:
-                res.append(node)
-                visited.add(node)
-                return True
+            # if adj_list[node] == []:
+            #     res.append(node)
+            #     visited.add(node)
+            #     return True
             
             cycle.add(node)
             for pre in adj_list[node]:
