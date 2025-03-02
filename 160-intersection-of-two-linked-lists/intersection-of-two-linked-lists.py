@@ -6,20 +6,17 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        seena = set()
-        seenb = set()
+        l1 = headA
+        l2 = headB
 
-        tmpa= headA
-        tmpb = headB
+        while l1!=l2:
+            if l1:
+                l1 = l1.next
+            else:
+                l1 = headB
+            if l2:
+                l2 = l2.next
+            else:
+                l2 = headA
 
-        while tmpa or tmpb:
-            seena.add(tmpa)
-            seenb.add(tmpb)
-            if tmpa in seenb:
-                return tmpa
-            if tmpb in seena:
-                return tmpb
-            if tmpa: tmpa = tmpa.next
-            if tmpb: tmpb = tmpb.next
-        
-        return tmpb
+        return l1
