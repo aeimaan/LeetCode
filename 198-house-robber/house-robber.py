@@ -1,15 +1,12 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        if len(nums) <= 1: return max(nums)
+        if len(nums) <= 2: return max(nums) 
+        n = len(nums)
+        dp = [0] * n
+        dp[0] = nums[0]
+        dp[1] = max(nums[1], nums[0])
 
-        memory = [0] * len(nums)
-        memory[0] = nums[0] 
-        memory[1] = max(nums[0], nums[1])
-
-        for i in range(2,len(nums)):
-            # can either rob current house pluse i - 2
-            # or not rob current house so continue i-1
-            # Choose by max
-            memory[i] = max(nums[i] + memory[i-2], memory[i-1])
-
-        return memory[-1]
+        for i in range(2, n):
+            dp[i] = max(nums[i] + dp[i-2], dp[i-1])
+            
+        return dp[n-1]
