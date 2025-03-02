@@ -3,8 +3,8 @@ class Solution:
         state = [0] * (n+1) 
         
         for i in range(n+1):
-            if i <= 2:
-                state[i] = i
+            if i <= 1:
+                state[i] = 1
                 continue
             state[i] = state[i-1] + state[i-2]
 
