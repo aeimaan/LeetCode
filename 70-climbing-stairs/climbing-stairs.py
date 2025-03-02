@@ -7,9 +7,7 @@ class Solution:
                 state[i] = i
                 continue
             state[i] = state[i-1] + state[i-2]
-            print(state[i-1], state[i-2], state[i])
 
-        print(state)
         return state[-1]
 
 
