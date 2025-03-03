@@ -12,7 +12,7 @@ class Solution:
                     dp[i][j] = True
                     continue
                 
-                if (s[i] == s[j]) and (j-i <2 or dp[i+1][j-1]):
+                if (s[i] == s[j]) and (j-i <=2 or dp[i+1][j-1]):
                     dp[i][j] = True
                     if maxlen < (j-i+1):
                         maxlen = j-i+1
