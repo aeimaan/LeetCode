@@ -2,20 +2,18 @@ import string
 
 class Solution:
     def numDecodings(self, s: str) -> int:
-        mapping = {str(i+1): chr(ord('A') + i) for i in range(26)}
-        count = 0
         n = len(s)
-        dp = [0] * (n+1)
-        dp[n] = 1
+        dp = { len(s) : 1}
 
-        for i in range(n-1, -1, -1):
-            char = s[i]
+        def dfs(i):
+            if i in dp: return dp[i] 
+            if s[i] == "0": return 0
 
-            if char == "0":
-                dp[i] = 0
-            else:
-                dp[i] = dp[i+1]
-                if ( i+1 < n and int(s[i:i+2])<=26 ):
-                    dp[i]+= dp[i+2]
+            res = dfs(i+1)
 
-        return dp[0]
+            if (i+1 < n and int(s[i:i+2]) <= 26):
+                res += dfs(i+2)
+            dp[i] = res
+            return res
+        
+        return dfs(0)
