@@ -7,18 +7,17 @@ class Solution:
         path = ""
         res = []
 
-        def dfs ( idx, path):
-            if idx == len(digits):
+
+        def dfs(idx, path):
+            if idx >= len(digits):
                 res.append(path)
                 return
-            
             neighbors = lettersFromNum[digits[idx]]
 
-            for char in neighbors:
-                path += (char)
-                dfs(idx + 1, path)
-                path = path[:-1]
-
+            for neigh in neighbors:
+                dfs(idx+1, path+neigh)
+            
             return 
+
         dfs(0, path)
         return res
