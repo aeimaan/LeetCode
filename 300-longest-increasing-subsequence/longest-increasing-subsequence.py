@@ -9,5 +9,4 @@ class Solution:
             for j in range(i+1, n):
                 if nums[i]  < nums[j]: # Can add to this subseq
                     dp[i] = max( dp[i] ,  1+ dp[j])
-                res = max(dp[i], res)
-        return res
+        return max(dp)
