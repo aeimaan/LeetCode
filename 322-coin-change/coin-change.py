@@ -1,23 +1,19 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        if amount == 0: return 0
         dp = {}
-        
+        def dfs(remain):
+            if remain == 0: return 0
+            if remain in dp: return dp[remain]
+            if remain < 0: return float('inf')
 
-        def dfs(amnt):
-            if amnt == 0: return 1
-            if amnt in dp: return dp[amnt]
-            if amnt < 0: return 9999999
-            
-            minCoins = 9999999
+            coinsNeeded = float('inf')
             for x in coins:
-                minCoins = min(dfs(amnt - x), minCoins)
+                coinsNeeded = min(coinsNeeded, dfs(remain - x) + 1)
 
-            dp[amnt] = 1 + minCoins
-            return 1 + minCoins
-        
+            dp[remain] = coinsNeeded
+            return coinsNeeded
 
-        x = dfs(amount)-1
-        if x == 9999999: return -1
-        return x
-
+        res = dfs(amount)
+        if res == float('inf'):
+            return -1
+        return res
