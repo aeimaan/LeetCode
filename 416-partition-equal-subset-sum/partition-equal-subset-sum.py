@@ -3,16 +3,20 @@ class Solution:
         if sum(nums) % 2 == 1:
             # ODD
             return False
-        memo = {}
+        memo = set()
+        memo.add(0)
         target = sum(nums) // 2
+        n = len(nums)
 
-        def dfs(idx, val):
-            if val == target: return True
-            if (idx, val) in memo: return memo[(idx, val)]
-            if idx >= len(nums) or val > target: return False
-
-            options = dfs(idx+1, val) or dfs(idx + 1, val + nums[idx])
-            memo[(idx, val)] = options
-            return options
-        return dfs(0, 0)
+        for i in range(n-1, -1, -1):
+            tmp = set()
+            for x in memo:
+                if nums[i] + x == target:
+                    return True
+                else:
+                    tmp.add(nums[i] + x)
+                    tmp.add(x)
+            memo = tmp
+        return False
+        
             
