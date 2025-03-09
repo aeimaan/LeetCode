@@ -1,24 +1,24 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        if len(edges) < n-1: return False
-        adj_list = { i:[] for i in range(n)}
-        visited= set()
-        # Want no cycles
-
-        for x,y in edges:
-            adj_list[x].append(y)
-            adj_list[y].append(x)
+        if len(edges) > (n - 1):
+            return False
         
-        def dfs(node, parent):
-            if node in visited:
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        
+        visit = set()
+        def dfs(node, par):
+            if node in visit:
                 return False
-            visited.add(node)
-            for x in adj_list[node]:
-                if x == parent:
-                    continue
-                if dfs(x, node) == False:
-                    return False
             
-
-        if dfs(0,-1) == False: return False
-        return True if len(visited) == n else False
+            visit.add(node)
+            for nei in adj[node]:
+                if nei == par:
+                    continue
+                if not dfs(nei, node):
+                    return False
+            return True
+        
+        return dfs(0, -1) and len(visit) == n
