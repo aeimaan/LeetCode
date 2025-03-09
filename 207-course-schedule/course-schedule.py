@@ -5,7 +5,7 @@ class Solution:
         cycle = set()
 
 
-        for pre, course in prerequisites:
+        for course, pre in prerequisites:
             adj_list[course].append(pre)
 
         def dfs(node):
