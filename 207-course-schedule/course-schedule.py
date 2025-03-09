@@ -1,30 +1,29 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # Want to detect that there are no cycles in ths graph
-
-        adj_list = { i:[]  for i in range(numCourses)}
-        cycle = set()
+        adj_list = { i:[] for i in range(numCourses)}
         visited = set()
+        cycle = set()
 
-        for course, prereq in prerequisites:
-            adj_list[course].append(prereq)
-        
+
+        for pre, course in prerequisites:
+            adj_list[course].append(pre)
+
         def dfs(node):
             if node in cycle:
                 return False
             if node in visited:
                 return True
-
+            
             cycle.add(node)
-            for prereq in adj_list[node]:
-                if dfs(prereq) == False:
+            for neighbor in adj_list[node]:
+                if dfs(neighbor) == False:
                     return False
             
             cycle.remove(node)
             visited.add(node)
             return True
-        
         for i in range(numCourses):
             if dfs(i) == False:
                 return False
         return True
+
