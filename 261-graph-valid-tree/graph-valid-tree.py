@@ -1,6 +1,6 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        if len(edges) > n-1: return False
+        if len(edges) != n-1: return False
         adj_list = { i:[] for i in range(n)}
         visited= set()
         # Want no cycles
