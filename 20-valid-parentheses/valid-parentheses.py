@@ -7,7 +7,7 @@ class Solution:
         for c in s:
             if c in {"(", "{", "["}:
                 stack.append(c)
-            if len(stack) == 0: return False
+            if not stack: return False
             if c == ")": 
                 if stack.pop() != "(": return False 
             if c == "}": 
