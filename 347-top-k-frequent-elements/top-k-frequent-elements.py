@@ -4,7 +4,7 @@ class Solution:
         highest = 0
         for x in nums:
             fmap[x] = fmap.get(x, 0) + 1
-            highest = max(highest, fmap[x])
+            highest += 1
         
         fmap2 = {i+1:[] for i in range(len(nums))} 
         for num, count in fmap.items():
