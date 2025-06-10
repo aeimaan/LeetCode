@@ -13,6 +13,7 @@ class Solution:
         res = []
 
         for i in range(highest, -1, -1):
+            if i not in fmap2: continue
             for x in fmap2[i]:
                 k -= 1
                 res.append(x)
