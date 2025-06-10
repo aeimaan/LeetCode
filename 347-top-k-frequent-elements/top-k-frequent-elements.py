@@ -7,7 +7,6 @@ class Solution:
             highest = max(highest, fmap[x])
         
         fmap2 = {i+1:[] for i in range(len(nums))} 
-        print(fmap2)
         for num, count in fmap.items():
             fmap2[count].append(num)
 
