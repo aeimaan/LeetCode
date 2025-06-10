@@ -3,31 +3,30 @@ class Solution:
         fmap = {}
 
         for c in s:
-            fmap[c] = 1 + fmap.get(c, 0)
+            fmap[c] = fmap.get(c, 0) + 1
         
-        maxHeap = [[-count, char] for char, count in fmap.items()]
-        heapq.heapify(maxHeap)
+        max_heap = [[-count, char] for char, count in fmap.items()]
+        heapq.heapify(max_heap)
 
         prev = None
         res = ""
-        while maxHeap:
-            count, char = heapq.heappop(maxHeap)
-            if char == prev:
-                if maxHeap:
-                    count2, char2 = heapq.heappop(maxHeap)
+
+        while max_heap:
+            count, cur = heapq.heappop(max_heap)
+            if prev != cur:
+                res += cur
+                prev = cur
+                count += 1
+                if count != 0: heapq.heappush(max_heap, [count, cur])
+            else:
+                count2, next_char = 0, None
+                if max_heap:
+                    count2, next_char = heapq.heappop(max_heap)
+                    res += next_char
+                    prev = next_char
+                    count2 += 1
+                    if count2 != 0: heapq.heappush(max_heap, [count2, next_char])
+                    heapq.heappush(max_heap, [count, cur])
                 else:
                     return ""
-                res += char2
-                prev = char2
-                count2 += 1
-                if count2 != 0: heapq.heappush(maxHeap, [count2, char2])
-                heapq.heappush(maxHeap, [count, char])
-            else:
-                res += char
-                count += 1
-                if count != 0: heapq.heappush(maxHeap, [count, char])
-                prev = char
         return res
-
-
-
