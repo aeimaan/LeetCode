@@ -10,6 +10,7 @@ class Solution:
 
         for s in strs:
             tmp = ''.join(sorted(s))
+            print(tmp)
             if tmp not in res:
                 res[tmp] = []
             res[tmp].append(s)
