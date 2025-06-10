@@ -1,25 +1,26 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        visited = set()
         ROWS = len(grid)
         COLS = len(grid[0])
-        islands = 0
-        visited = set()
-        
-        def dfs(x,y, visited):
-            if x < 0 or x >= ROWS or y < 0 or y >= COLS or (x,y) in visited or grid[x][y]=="0":
+        res = 0
+
+        def dfs(x,y,visited):
+            if x < 0 or x >= ROWS or y<0 or y>=COLS:
                 return
-            
+            if (x,y) in visited or grid[x][y] == "0":
+                return
+
             visited.add((x,y))
             dirs = [ [1,0], [0,1], [-1,0], [0,-1] ]
 
-            for x_new, y_new in dirs:
-                dfs(x+x_new, y+y_new, visited)
+            for _x, _y in dirs:
+                dfs(x + _x, y + _y, visited)
+            return
 
-        
         for x in range(ROWS):
             for y in range(COLS):
-                if (x,y) not in visited and grid[x][y] == "1":
+                if grid[x][y] == "1" and (x,y) not in visited:
                     dfs(x,y,visited)
-                    islands += 1
-
-        return islands
+                    res += 1
+        return res
