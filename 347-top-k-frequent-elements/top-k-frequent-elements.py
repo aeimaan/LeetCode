@@ -6,8 +6,9 @@ class Solution:
             fmap[x] = fmap.get(x, 0) + 1
             highest += 1
         
-        fmap2 = {i+1:[] for i in range(len(nums))} 
+        fmap2 = {} 
         for num, count in fmap.items():
+            if count not in fmap2: fmap2[count] = []
             fmap2[count].append(num)
 
         res = []
