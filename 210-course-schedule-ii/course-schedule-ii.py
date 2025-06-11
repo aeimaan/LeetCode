@@ -1,86 +1,27 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        adj_list = { i:[] for i in range(numCourses)}
-        visited = set()
+        adj_list = {i:[] for i in range(numCourses)}
         cycle = set()
+        finished = set()
         res = []
 
         for course, pre in prerequisites:
             adj_list[course].append(pre)
-        
+
         def dfs(node):
             if node in cycle: return False
-            if node in visited: return 
-
+            if node in finished: 
+                return True
             cycle.add(node)
-            for neigh in adj_list[node]:
-                if dfs(neigh) == False:
-                    return False
+            for pre in adj_list[node]:
+                if not dfs(pre): return False
             cycle.remove(node)
-            visited.add(node)
+            finished.add(node)
             res.append(node)
+            adj_list[node] = []
             return True
-        
+
         for i in range(numCourses):
-            if dfs(i) == False:
-                return []
+            if not dfs(i): return []
+
         return res
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # adj_list = {i:[] for i in range(numCourses)}
-        # for course, prereq in prerequisites:
-        #     adj_list[course].append(prereq)
-
-        # res = []
-        # visited = set()
-        # cycle = set()
-
-        # def dfs(node):
-        #     if node in cycle:
-        #         return False
-        #     if node in visited:
-        #         return True
-        #     if adj_list[node] == []:
-        #         res.append(node)
-        #         visited.add(node)
-        #         return True
-            
-        #     cycle.add(node)
-        #     for pre in adj_list[node]:
-        #         if dfs(pre) == False:
-        #             return False
-        #     cycle.remove(node)
-        #     visited.add(node)
-        #     res.append(node)
-        #     return True
-        
-        # for i in range(numCourses):
-        #     if i not in visited:
-        #         if dfs(i) == False:
-        #             return []
-        
-        # return res
-        
