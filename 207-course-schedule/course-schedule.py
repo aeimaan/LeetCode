@@ -21,5 +21,4 @@ class Solution:
         
         for i in range(numCourses):
             if not dfs(i): return False
-        return True
-        
+        return True  
