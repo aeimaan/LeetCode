@@ -11,10 +11,8 @@ class Solution:
             maxx = max(maxx, x)
             minn = min(minn, x)
         
-        tmp = 0
         for i in nums:
             if i + 1 not in fmap and i in fmap and i not in checked:
-                # have a number thats the start of the chain
                 checked.add(i)
                 k = i
                 while k - 1 in fmap:
