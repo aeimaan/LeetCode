@@ -11,16 +11,11 @@ class Solution:
         hi = max(p.val, q.val)
         res = root
         def dfs(node, lo, hi):
-            nonlocal res
-            if not node: return
-            if node.val == lo or node.val == hi:
-                res = node
-                return
-            elif lo < node.val and node.val < hi:
-                res = node
-                return
-            dfs(node.left, lo, hi)
-            dfs(node.right, lo, hi)
-        dfs(root,lo,hi)
-        return res
+            if node.val < lo and node.val < hi:
+                return dfs(node.right,lo,hi)
+            elif node.val > lo and node.val > hi:
+                return dfs(node.left, lo,hi)
+            else:
+                return node
+        return dfs(root, lo,hi)
             
