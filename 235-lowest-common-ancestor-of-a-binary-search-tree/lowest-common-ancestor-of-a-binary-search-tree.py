@@ -7,17 +7,20 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        # BST the left node < root Node < right Node
-        # So the common ancestor has to be where the min(p,q) falls on left or root and the max else
-
-        p, q = min(p.val, q.val), max(p.val, q.val)
-
-        def dfs(node, p, q):
-            if node.val > p and node.val > q:
-                return dfs(node.left, p, q)
-            elif node.val < p and node.val < q:
-                return dfs(node.right, p, q)
-            else:
-                return node
+        lo = min(p.val, q.val)
+        hi = max(p.val, q.val)
+        res = root
+        def dfs(node, lo, hi):
+            nonlocal res
+            if not node: return
+            if node.val == lo or node.val == hi:
+                res = node
+                return
+            elif lo < node.val and node.val < hi:
+                res = node
+                return
+            dfs(node.left, lo, hi)
+            dfs(node.right, lo, hi)
+        dfs(root,lo,hi)
+        return res
             
-        return dfs(root, p, q)
