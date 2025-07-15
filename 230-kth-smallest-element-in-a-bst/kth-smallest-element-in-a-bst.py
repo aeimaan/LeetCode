@@ -14,7 +14,9 @@ class Solution:
             if not node: return 0
             dfs(node.left)
             count += 1
-            if count == k: res = node.val
+            if count == k: 
+                res = node.val
+                return
             dfs(node.right)
             return 
         dfs(root)
