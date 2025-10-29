@@ -4,7 +4,7 @@ class Codec:
         """
         res = ""
         for s in strs:
-            res += "{number:06}".format(number=len(s))
+            res += f"{len(s):06d}"
             res += s
         return res
 
@@ -15,11 +15,12 @@ class Codec:
         res = []
         i = 0
         while i < len(s):
-            num = s[i:i+6]
-            val = s[i+6: i+6+int(num)]
-            res.append(val)
-            i += 6 + int(num)
+            length = int(s[i:i+6])
+            decoded_str = s[i+6:i+6+length]
+            res.append(decoded_str)
+            i +=  length + 6
         return res
+
 
 
 # Your Codec object will be instantiated and called as such:
