@@ -7,7 +7,7 @@ class Solution:
         for x in nums:
             fmap.add(x)
         for x in fmap:
-            if x-1 not in fmap:
+            if x-1 not in fmap and x not in checked:
                 tmp = x
                 while tmp + 1 in fmap:
                     tmp += 1
