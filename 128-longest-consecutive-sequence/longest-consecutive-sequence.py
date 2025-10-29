@@ -3,19 +3,14 @@ class Solution:
         if not nums: return 0
         fmap = set()
         checked = set()
-        maxx = minn = nums[0]
-        res = 0
-
+        count = 0
         for x in nums:
             fmap.add(x)
-            maxx = max(maxx, x)
-            minn = min(minn, x)
-        
-        for i in nums:
-            if i + 1 not in fmap and i in fmap and i not in checked:
-                checked.add(i)
-                k = i
-                while k - 1 in fmap:
-                    k -= 1
-                res = max(res, i - k+1)
-        return res
+        for x in fmap:
+            if x-1 not in fmap and x not in checked:
+                tmp = x
+                while tmp + 1 in fmap:
+                    tmp += 1
+                count = max(count, tmp-x +1)
+            checked.add(x)
+        return count
